@@ -66,28 +66,33 @@
                                                     <td class="cell">{{ $no++ }}</td>
                                                     <td class="cell">{{ $list->name }}</td>
                                                     <td class="cell">{{ $list->created_at }}</td>
-                                                    <td class=""
-                                                        style="display: flex; gap: 8px; width: auto; justify-content: center;">
-                                                        <a href="/edit_roles/{{ $list->id }}"><span
-                                                                class="status completed"><i
-                                                                    class='bx bxs-edit'></i></span></a>
-                                                        <form action="/delete_roles/{{ $list->id }}" method="post">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <button type="submit" style="border: 0px; border-radius: 60px;"
-                                                                onclick="return confirm('Apakah Yakin Mau Hapus Data?')"><span
-                                                                    class="status pending"><i
-                                                                        class='bx bxs-trash'></i></span>
-                                                            </button>
-                                                        </form>
+                                                    @if ($list->name == 'Super Admin')
+                                                    <td></td>
+                                                    @else
+                                                        <td class=""
+                                                            style="display: flex; gap: 8px; width: auto; justify-content: center;">
+                                                            <a href="/edit_roles/{{ $list->id }}"><span
+                                                                    class="status completed"><i
+                                                                        class='bx bxs-edit'></i></span></a>
+                                                            <form action="/delete_roles/{{ $list->id }}" method="post">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <button type="submit"
+                                                                    style="border: 0px; border-radius: 60px;"
+                                                                    onclick="return confirm('Apakah Yakin Mau Hapus Data?')"><span
+                                                                        class="status pending"><i
+                                                                            class='bx bxs-trash'></i></span>
+                                                                </button>
+                                                            </form>
 
-                                                    </td>
+                                                        </td>
+                                                    @endif
                                             </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
                                 </div><!--//table-responsive-->
-                                
+
                             </div><!--//app-card-body-->
                         </div><!--//app-card-->
 

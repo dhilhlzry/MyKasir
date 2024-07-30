@@ -16,12 +16,12 @@ return new class extends Migration
             $table->string('kode')->nullable();
             $table->string('produk');
             $table->string('satuan');
-            $table->string('kategori');
             $table->integer('stok');
             $table->integer('hargabeli');
             $table->integer('hargajual');
             $table->string('keterangan')->nullable();
-            $table->string('supplier');
+            $table->foreignId('kategori');
+            $table->foreignId('supplier');
             // $table->string('id_user');
             $table->rememberToken();
             $table->timestamps();

@@ -36,12 +36,12 @@
                             <div class="email mb-3">
                                 <label class="sr-only" for="signin-email">Email</label>
                                 <input name="email" id="email" type="email" class="form-control signin-email"
-                                    placeholder="Email address" required="required">
+                                    placeholder="Email address" value="{{ old('email') }}" required="required">
                             </div><!--//form-group-->
                             <div class="password mb-3">
                                 <label class="sr-only" for="signin-password">Password</label>
                                 <input name="password" id="password" type="password"
-                                    class="form-control signin-password" placeholder="Password" required="required">
+                                    class="form-control signin-password" placeholder="Password" value="{{ old('password') }}" required="required">
                                 <div class="extra mt-3 row justify-content-between">
                                     <div class="col-6">
                                         <div class="form-check">
@@ -88,7 +88,7 @@
             <div class="auth-background-holder">
             </div>
             <div class="auth-background-mask"></div>
-            {{-- <div class="auth-background-overlay p-3 p-lg-5">
+            <div class="auth-background-overlay p-3 p-lg-5">
                 <div class="d-flex flex-column align-content-end h-100">
                     <div class="h-100"></div>
                     <div class="overlay-content p-3 p-lg-4 rounded">
@@ -99,7 +99,7 @@
                         </div>
                     </div>
                 </div>
-            </div><!--//auth-background-overlay--> --}}
+            </div><!--//auth-background-overlay-->
         </div><!--//auth-background-col-->
 
     </div><!--//row-->

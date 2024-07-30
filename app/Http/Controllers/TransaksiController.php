@@ -24,9 +24,9 @@ class transaksiController extends Controller
             $data['untuk_total'] = Keranjang::where('id_user', $iduser)->first();
         }
         $data['kodeauto'] = Headtrans::selectRaw('LPAD(CONVERT(COUNT("kode") + 1, char(8)) , 5,"0") as invoice')->first();
-        $data['produk'] = Produk::paginate(10)->withQueryString();
+        $data['produk'] = Produk::with('join_kategori','join_supplier')->paginate(10);
         $data['title'] = "Transaksi_input";
-        $data['jumlah'] = Keranjang::selectRaw('SUM(subtotal) as total')->first();
+        $data['jumlah'] = Keranjang::selectRaw('SUM(subtotal) as total')->where('id_user', $iduser)->first();
         return view('transaksi.input_penjualan', $data);
     }
 
@@ -45,7 +45,7 @@ class transaksiController extends Controller
             $keranjang->harga = $query->hargajual;
             $keranjang->qty = '1';
             $keranjang->subtotal = $query->hargajual;
-            $keranjang->id_user = '1';
+            $keranjang->id_user = $iduser;
             $keranjang->save();
         }
         return redirect('/input_penjualan');
@@ -55,33 +55,44 @@ class transaksiController extends Controller
     {
         $iduser = auth()->user()->id;
         $kodeauto = Headtrans::selectRaw('LPAD(CONVERT(COUNT("kode") + 1, char(8)) , 5,"0") as invoice')->first();
-        $queryjumlah = Keranjang::selectRaw('COUNT(*) as jumlah')->first();
-        $querytotal = Keranjang::selectRaw('SUM(subtotal) as total')->first();
-        $headtrans = new Headtrans();
-        $headtrans->kode = 'TRS' . $kodeauto->invoice;
-        $headtrans->tanggal = Carbon::parse(now())->locale('id')->isoFormat('D MMMM Y');
-        $headtrans->user = auth()->user()->name;
-        $headtrans->jumlah = $queryjumlah->jumlah;
-        $headtrans->total_bayar = $querytotal->total;
-        $headtrans->bayar = $request->bayar;
-        $headtrans->kembali = $request->kembali;
-        
-        $detail = DB::table('keranjang')->where('id_user', $iduser)->get();
-        foreach ($detail as $list) {
-            Detailtrans::create([
-                'kode' => 'TRS' . $kodeauto->invoice,
-                'kode_produk' => $list->kode,
-                'produk' => $list->produk,
-                'harga' => $list->harga,
-                'qty' => $list->qty,
-                'subtotal' => $list->subtotal,
-            ]);
+        $queryjumlah = Keranjang::selectRaw('COUNT(*) as jumlah')->where('id_user', $iduser)->first();
+        $querytotal = Keranjang::selectRaw('SUM(subtotal) as total')->where('id_user', $iduser)->first();
+        $chart = Keranjang::where('id_user', $iduser)->first();
+
+        if ($chart == null) {
+            return redirect('/input_penjualan')->with('warning', 'Keranjang Kosong !');
+        }else if ($request->bayar == null ) {
+            return redirect('/input_penjualan')->with('warning', 'Transaksi Gagal !');
+        }else if ($request->bayar < $querytotal->total ) {
+            return redirect('/input_penjualan')->with('warning', 'Transaksi Gagal !');
+        }else{
+
+            $headtrans = new Headtrans();
+            $headtrans->kode = 'TRS' . $kodeauto->invoice;
+            $headtrans->tanggal = Carbon::parse(now())->locale('id')->isoFormat('D MMMM Y');
+            $headtrans->user = auth()->user()->id;
+            $headtrans->jumlah = $queryjumlah->jumlah;
+            $headtrans->total_bayar = $querytotal->total;
+            $headtrans->bayar = $request->bayar;
+            $headtrans->kembali = $request->kembali;
+    
+            $detail = DB::table('keranjang')->where('id_user', $iduser)->get();
+            foreach ($detail as $list) {
+                Detailtrans::create([
+                    'kode' => 'TRS' . $kodeauto->invoice,
+                    'kode_produk' => $list->kode,
+                    'produk' => $list->produk,
+                    'harga' => $list->harga,
+                    'qty' => $list->qty,
+                    'subtotal' => $list->subtotal,
+                ]);
+            }
+    
+            $headtrans->save();
+            $delete =  DB::table('keranjang')->where('id_user', $iduser)->delete();
+            return redirect('/input_penjualan')->with('success', 'Transaksi Berhasil !');
+
         }
-
-        $headtrans->save();
-        $delete =  DB::table('keranjang')->where('id_user', $iduser)->delete();
-        return redirect('/input_penjualan')->with('success', 'Transaksi Berhasil !');
-
         // $keranjang =  DB::table('keranjang')->where('id_user', $iduser)->get();
         // SELECT SUM(subtotal) FROM keranjang WHERE id_user = '';
         // SELECT COUNT(*) as jumlah FROM keranjang WHERE id_user = '2';
@@ -90,11 +101,18 @@ class transaksiController extends Controller
     public function update(Request $request, string $id)
     {
         $query =  DB::table('keranjang')->where('id', $id)->first();
-        $keranjang = Keranjang::findOrFail($id);
-        $keranjang->qty = $request->qty;
-        $keranjang->subtotal = $query->subtotal * $request->qty;
-        $keranjang->save();
-        return redirect('/input_penjualan');
+        $produk =  DB::table('produk')->where('kode', $query->kode)->first();
+        if ($request->qty <= 0) {
+            return redirect('/input_penjualan')->with('warning', 'Tidak Boleh Minus !');
+        } else if ($request->qty > $produk->stok) {
+            return redirect('/input_penjualan')->with('warning', 'Stok Tidak Cukup !');
+        } else {
+            $keranjang = Keranjang::findOrFail($id);
+            $keranjang->qty = $request->qty;
+            $keranjang->subtotal = $produk->hargajual * $request->qty;
+            $keranjang->save();
+            return redirect('/input_penjualan');
+        }
     }
 
     public function delete_keranjang(Request $request, string $id)
@@ -108,7 +126,7 @@ class transaksiController extends Controller
         if (request('search_transaksi')) {
             $data['transaksi'] = Headtrans::where('kode', 'like', '%' . request('search_transaksi') . '%')->paginate();
         } else {
-            $data['transaksi'] = Headtrans::paginate(10)->withQueryString();
+            $data['transaksi'] = Headtrans::with('join_user')->paginate(10);
         }
         $data['title'] = "Transaksi_data";
         return view('transaksi.data_transaksi', $data);
@@ -117,11 +135,9 @@ class transaksiController extends Controller
     public function detail(Request $request, string $id)
     {
         $head  =  DB::table('headtrans')->where('id', $id)->first();
-        $data['headtrans']  =  DB::table('headtrans')->where('id', $id)->first();
+        $data['headtrans']  =  Headtrans::with('join_user')->where('id', $id)->first();
         $data['detailtrans']  =  DB::table('detailtrans')->where('kode', $head->kode)->get();
         $data['title'] = "Transaksi_data";
         return view('transaksi.detail_transaksi', $data);
     }
-
-
 }

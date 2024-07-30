@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produk;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SupplierController extends Controller
 {
@@ -53,7 +55,20 @@ class SupplierController extends Controller
     public function delete(Request $request, string $id)
     {
         $delete = Supplier::findOrFail($id);
-        $delete->delete();
-        return redirect('/supplier')->with('success', 'Delete Data Berhasil !');
+        if ($check = Produk::where('supplier', $delete->id)->first()) {
+            return redirect('/supplier')->with('warning', 'Supplier Sedang Digunakan !');;
+        } else {
+            $suppliers = Supplier::find($id)->delete();
+            return redirect('/supplier')->with('success', 'Delete Data Berhasil !');;
+        }
+    }
+
+    public function detail(Request $request, string $id)
+    {
+        $query  =  DB::table('supplier')->where('id', $id)->first();
+        $data['supplier']  =  DB::table('supplier')->where('id', $id)->first();
+        $data['detail']  =  Produk::with('join_kategori','join_supplier')->where('supplier', $query->id)->paginate(5);
+        $data['title'] = "Supplier";
+        return view('supplier.detail_supplier', $data);
     }
 }

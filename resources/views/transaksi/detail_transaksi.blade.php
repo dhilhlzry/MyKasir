@@ -33,7 +33,7 @@
                                         <div class="d-flex gap-5 mb-1">
                                             <label for="setting-input-2" class="form-label"
                                                 style="padding-right: 45px">Nama Kasir</label>
-                                            <label for="setting-input-2" class="form-label">: {{ $headtrans->user }}</label>
+                                            <label for="setting-input-2" class="form-label">: {{ $headtrans->join_user->name }}</label>
                                         </div>
                                     </section>
                                     
@@ -78,7 +78,7 @@
                                         </div>
                                     </div>
 
-                                    <section class="" style="padding-right: 150px; font-weight: 600">
+                                    <section class="" style="padding-right: 110px; font-weight: 600">
                                         <div class="d-flex justify-content-end gap-5 mb-1" style="margin-top: -16px">
                                             <label for="setting-input-2" class="form-label"
                                                 style="padding-right: 22px">Total</label>

@@ -111,7 +111,7 @@
                                                                     <input type="text" class="form-control"
                                                                         id="kode" name="kode"
                                                                         @error('kode') is-invalid @enderror
-                                                                        placeholder="Masukan No Kode" value="{{ $list->kode }}" required />
+                                                                        placeholder="Masukan No Kode" value="{{ $list->kode }}" required readonly />
                                                                     @error('kode')
                                                                         <div class="invalid-feedback">
                                                                             {{ $message }}

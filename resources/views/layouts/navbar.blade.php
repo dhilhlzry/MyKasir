@@ -41,14 +41,14 @@
                         <div class="search-mobile-trigger d-sm-none col">
                             <i class="search-mobile-trigger-icon fa-solid fa-magnifying-glass"></i>
                         </div><!--//col-->
-                        <div class="app-search-box col">
+                        {{-- <div class="app-search-box col">
                             <form class="app-search-form">
                                 <input type="text" placeholder="Search..." name="search"
                                     class="form-control search-input">
                                 <button type="submit" class="btn search-btn btn-primary" value="Search"><i
                                         class="fa-solid fa-magnifying-glass"></i></button>
                             </form>
-                        </div><!--//app-search-box-->
+                        </div><!--//app-search-box--> --}}
 
                         <div class="app-utilities col-auto">
                             <div class="app-utility-item app-notifications-dropdown dropdown">
@@ -62,7 +62,7 @@
                                         <path fill-rule="evenodd"
                                             d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
                                     </svg>
-                                    <span class="icon-badge">3</span>
+                                    <span class="icon-badge">1</span>
                                 </a><!--//dropdown-toggle-->
 
                                 <div class="dropdown-menu p-0" aria-labelledby="notifications-dropdown-toggle">
@@ -70,23 +70,6 @@
                                         <h5 class="dropdown-menu-title mb-0">Notifications</h5>
                                     </div><!--//dropdown-menu-title-->
                                     <div class="dropdown-menu-content">
-                                        <div class="item p-3">
-                                            <div class="row gx-2 justify-content-between align-items-center">
-                                                <div class="col-auto">
-                                                    <img class="profile-image"
-                                                        src="{{ asset('images/profiles/profile-1.png') }}"
-                                                        alt="">
-                                                </div><!--//col-->
-                                                <div class="col">
-                                                    <div class="info">
-                                                        <div class="desc">Amy shared a file with you. Lorem ipsum
-                                                            dolor sit amet, consectetur adipiscing elit. </div>
-                                                        <div class="meta"> 2 hrs ago</div>
-                                                    </div>
-                                                </div><!--//col-->
-                                            </div><!--//row-->
-                                            <a class="link-mask" href="notifications.html"></a>
-                                        </div><!--//item-->
                                         <div class="item p-3">
                                             <div class="row gx-2 justify-content-between align-items-center">
                                                 <div class="col-auto">
@@ -111,54 +94,16 @@
                                             </div><!--//row-->
                                             <a class="link-mask" href="notifications.html"></a>
                                         </div><!--//item-->
-                                        <div class="item p-3">
-                                            <div class="row gx-2 justify-content-between align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="app-icon-holder icon-holder-mono">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16"
-                                                            class="bi bi-bar-chart-line" fill="currentColor"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd"
-                                                                d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2zm1 12h2V2h-2v12zm-3 0V7H7v7h2zm-5 0v-3H2v3h2z" />
-                                                        </svg>
-                                                    </div>
-                                                </div><!--//col-->
-                                                <div class="col">
-                                                    <div class="info">
-                                                        <div class="desc">Your report is ready. Proin venenatis
-                                                            interdum est.</div>
-                                                        <div class="meta"> 3 days ago</div>
-                                                    </div>
-                                                </div><!--//col-->
-                                            </div><!--//row-->
-                                            <a class="link-mask" href="notifications.html"></a>
-                                        </div><!--//item-->
-                                        <div class="item p-3">
-                                            <div class="row gx-2 justify-content-between align-items-center">
-                                                <div class="col-auto">
-                                                    <img class="profile-image"
-                                                        src="{{ asset('images/profiles/profile-2.png') }}"
-                                                        alt="">
-                                                </div><!--//col-->
-                                                <div class="col">
-                                                    <div class="info">
-                                                        <div class="desc">James sent you a new message.</div>
-                                                        <div class="meta"> 7 days ago</div>
-                                                    </div>
-                                                </div><!--//col-->
-                                            </div><!--//row-->
-                                            <a class="link-mask" href="notifications.html"></a>
-                                        </div><!--//item-->
                                     </div><!--//dropdown-menu-content-->
 
                                     <div class="dropdown-menu-footer p-2 text-center">
-                                        <a href="notifications.html">View all</a>
+                                        <a href="/notification">View all</a>
                                     </div>
 
                                 </div><!--//dropdown-menu-->
                             </div><!--//app-utility-item-->
                             <div class="app-utility-item">
-                                <a href="settings.html" title="Settings">
+                                <a href="/setting" title="Settings">
                                     <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-gear icon"
                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -175,8 +120,8 @@
                                     href="#" role="button" aria-expanded="false"><img
                                         src="{{ asset('images/user.png') }}" alt="user profile"></a>
                                 <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
-                                    <li><a class="dropdown-item" href="account.html">Account</a></li>
-                                    <li><a class="dropdown-item" href="settings.html">Settings</a></li>
+                                    <li><a class="dropdown-item" href="/notification">Notifications</a></li>
+                                    <li><a class="dropdown-item" href="/setting">Settings</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -196,7 +141,7 @@
             <div class="sidepanel-inner d-flex flex-column">
                 <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
                 <div class="app-branding">
-                    <a class="app-logo" href="index.html"><img class="logo-icon me-2"
+                    <a class="app-logo" href="/home"><img class="logo-icon me-2"
                             src="{{ asset('images/app-logo.svg') }}" alt="logo"><span
                             class="logo-text">PORTAL</span></a>
 
@@ -221,8 +166,9 @@
                         </li><!--//nav-item-->
                         <li class="nav-item has-submenu">
                             <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                            <a class="nav-link submenu-toggle {{ $title === 'Produk' ? 'active' : '' }}" href="#" data-bs-toggle="collapse"
-                                data-bs-target="#submenu-1" aria-expanded="false" aria-controls="submenu-1">
+                            <a class="nav-link submenu-toggle {{ $title === 'Produk' ? 'active' : '' }} {{ $title === 'Kategori' ? 'active' : '' }} {{ $title === 'Supplier' ? 'active' : '' }}"
+                                href="#" data-bs-toggle="collapse" data-bs-target="#submenu-1"
+                                aria-expanded="false" aria-controls="submenu-1">
                                 <span class="nav-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-database-add" viewBox="0 0 16 16">
@@ -242,22 +188,29 @@
                                     </svg>
                                 </span><!--//submenu-arrow-->
                             </a><!--//nav-link-->
-                            <div id="submenu-1" class="collapse submenu submenu-1 {{ $title === 'Produk' ? 'show' : '' }} {{ $title === 'Kategori' ? 'show' : '' }} {{ $title === 'Supplier' ? 'show' : '' }}" data-bs-parent="#menu-accordion">
+                            <div id="submenu-1"
+                                class="collapse submenu submenu-1 {{ $title === 'Produk' ? 'show' : '' }} {{ $title === 'Kategori' ? 'show' : '' }} {{ $title === 'Supplier' ? 'show' : '' }}"
+                                data-bs-parent="#menu-accordion">
                                 <ul class="submenu-list list-unstyled">
-                                    <li class="submenu-item"><a class="submenu-link {{ $title === 'Produk' ? 'active' : '' }}"
+                                    <li class="submenu-item"><a
+                                            class="submenu-link {{ $title === 'Produk' ? 'active' : '' }}"
                                             href="/produk">Produk</a></li>
-                                    <li class="submenu-item"><a class="submenu-link {{ $title === 'Kategori' ? 'active' : '' }}" href="/kategori">Kategori
+                                    <li class="submenu-item"><a
+                                            class="submenu-link {{ $title === 'Kategori' ? 'active' : '' }}"
+                                            href="/kategori">Kategori
                                             Produk</a>
                                     </li>
-                                    <li class="submenu-item"><a class="submenu-link {{ $title === 'Supplier' ? 'active' : '' }}"
+                                    <li class="submenu-item"><a
+                                            class="submenu-link {{ $title === 'Supplier' ? 'active' : '' }}"
                                             href="/supplier">Supplier</a></li>
                                 </ul>
                             </div>
                         </li><!--//nav-item-->
                         <li class="nav-item has-submenu">
                             <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                            <a class="nav-link submenu-toggle {{ $title === 'Transaksi_input' ? 'active' : '' }} {{ $title === 'Transaksi_data' ? 'active' : '' }}" href="#" data-bs-toggle="collapse"
-                                data-bs-target="#submenu-2" aria-expanded="false" aria-controls="submenu-2">
+                            <a class="nav-link submenu-toggle {{ $title === 'Transaksi_input' ? 'active' : '' }} {{ $title === 'Transaksi_data' ? 'active' : '' }}"
+                                href="#" data-bs-toggle="collapse" data-bs-target="#submenu-2"
+                                aria-expanded="false" aria-controls="submenu-2">
                                 <span class="nav-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-handbag" viewBox="0 0 16 16">
@@ -275,11 +228,17 @@
                                     </svg>
                                 </span><!--//submenu-arrow-->
                             </a><!--//nav-link-->
-                            <div id="submenu-2" class="collapse submenu submenu-2 {{ $title === 'Transaksi_input' ? 'show' : '' }} {{ $title === 'Transaksi_data' ? 'show' : '' }}" data-bs-parent="#menu-accordion">
+                            <div id="submenu-2"
+                                class="collapse submenu submenu-2 {{ $title === 'Transaksi_input' ? 'show' : '' }} {{ $title === 'Transaksi_data' ? 'show' : '' }}"
+                                data-bs-parent="#menu-accordion">
                                 <ul class="submenu-list list-unstyled">
-                                    <li class="submenu-item"><a class="submenu-link {{ $title === 'Transaksi_input' ? 'active' : '' }}" href="/input_penjualan">Input
+                                    <li class="submenu-item"><a
+                                            class="submenu-link {{ $title === 'Transaksi_input' ? 'active' : '' }}"
+                                            href="/input_penjualan">Input
                                             Penjualan</a></li>
-                                    <li class="submenu-item"><a class="submenu-link {{ $title === 'Transaksi_data' ? 'active' : '' }}" href="/data_transaksi">Data
+                                    <li class="submenu-item"><a
+                                            class="submenu-link {{ $title === 'Transaksi_data' ? 'active' : '' }}"
+                                            href="/data_transaksi">Data
                                             Transaksi</a>
                                     </li>
                                 </ul>
@@ -305,11 +264,10 @@
                                 <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                                 <a class="nav-link {{ $title === 'Roles' ? 'active' : '' }}" href="/roles">
                                     <span class="nav-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-tools" viewBox="0 0 16 16">
                                             <path
-                                                d="M5.122 21c.378.378.88.586 1.414.586S7.572 21.378 7.95 21l4.336-4.336a7.495 7.495 0 0 0 2.217.333 7.446 7.446 0 0 0 5.302-2.195 7.484 7.484 0 0 0 1.632-8.158l-.57-1.388-4.244 4.243-2.121-2.122 4.243-4.243-1.389-.571A7.478 7.478 0 0 0 14.499 2c-2.003 0-3.886.78-5.301 2.196a7.479 7.479 0 0 0-1.862 7.518L3 16.05a2.001 2.001 0 0 0 0 2.828L5.122 21zm4.548-8.791-.254-.616a5.486 5.486 0 0 1 1.196-5.983 5.46 5.46 0 0 1 4.413-1.585l-3.353 3.353 4.949 4.95 3.355-3.355a5.49 5.49 0 0 1-1.587 4.416c-1.55 1.55-3.964 2.027-5.984 1.196l-.615-.255-5.254 5.256h.001l-.001 1v-1l-2.122-2.122 5.256-5.255z">
-                                            </path>
+                                                d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3q0-.405-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814zm9.646 10.646a.5.5 0 0 1 .708 0l2.914 2.915a.5.5 0 0 1-.707.707l-2.915-2.914a.5.5 0 0 1 0-.708M3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026z" />
                                         </svg>
                                     </span>
                                     <span class="nav-link-text">Data Roles</span>
@@ -319,8 +277,9 @@
                         @endrole
                         <li class="nav-item has-submenu">
                             <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                            <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse"
-                                data-bs-target="#submenu-3" aria-expanded="false" aria-controls="submenu-3">
+                            <a class="nav-link submenu-toggle {{ $title === 'Setting' ? 'active' : '' }} {{ $title === 'Notification' ? 'active' : '' }}"
+                                href="#" data-bs-toggle="collapse" data-bs-target="#submenu-3"
+                                aria-expanded="false" aria-controls="submenu-3">
                                 <span class="nav-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
@@ -340,14 +299,16 @@
                                     </svg>
                                 </span><!--//submenu-arrow-->
                             </a><!--//nav-link-->
-                            <div id="submenu-3" class="collapse submenu submenu-3" data-bs-parent="#menu-accordion">
+                            <div id="submenu-3"
+                                class="collapse submenu submenu-3 {{ $title === 'Setting' ? 'show' : '' }} {{ $title === 'Notification' ? 'show' : '' }}"
+                                data-bs-parent="#menu-accordion">
                                 <ul class="submenu-list list-unstyled">
-                                    <li class="submenu-item"><a class="submenu-link"
-                                            href="notifications.html">Notifications</a></li>
-                                    <li class="submenu-item"><a class="submenu-link" href="account.html">Account</a>
-                                    </li>
-                                    <li class="submenu-item"><a class="submenu-link"
-                                            href="settings.html">Settings</a></li>
+                                    <li class="submenu-item"><a
+                                            class="submenu-link {{ $title === 'Notification' ? 'active' : '' }}"
+                                            href="/notification">Notifications</a></li>
+                                    <li class="submenu-item"><a
+                                            class="submenu-link {{ $title === 'Setting' ? 'active' : '' }}"
+                                            href="/setting">Settings</a></li>
                                 </ul>
                             </div>
                         </li><!--//nav-item-->

@@ -72,7 +72,7 @@ class RolesController extends Controller
     public function destroy($id)
     {
         $role_id =  Role::findOrFail($id);
-        if ($check = User::where('level', $role_id->name)->first()) {
+        if ($check = User::where('level', $role_id->id)->first()) {
             return redirect('/roles')->with('warning', 'Role Sedang Digunakan !');;
         } else {
             $roles = Role::find($id)->delete();

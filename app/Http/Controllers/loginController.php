@@ -26,8 +26,8 @@ class loginController extends Controller
 
         return back()->withErrors([
             // 'email' => 'Username / Password Salah !'
-            'email' => 'Gagal Login !'
-        ])->onlyInput('email');
+            'alert' => 'Login Failed !'
+        ])->onlyInput('email','password');
     }
 
     public function logout(Request $request)

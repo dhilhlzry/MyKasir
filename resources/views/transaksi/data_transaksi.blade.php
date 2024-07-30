@@ -71,7 +71,7 @@
                                                     <td class="cell">{{ $no++ }}</td>
                                                     <td class="cell">{{ $list->kode }}</td>
                                                     <td class="cell">{{ $list->tanggal }}</td>
-                                                    <td class="cell">{{ $list->user }}</td>
+                                                    <td class="cell">{{ $list->join_user->name }}</td>
                                                     <td class="cell">{{ $list->jumlah }} Barang</td>
                                                     <td class="cell">Rp. {{ $list->total_bayar }}</td>
                                                     <td class="cell">Rp. {{ $list->bayar }}</td>

@@ -20,4 +20,17 @@ class Produk extends Model
         'keterangan',
         'supplier',
     ];
+
+    public function join_kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'kategori', 'id');
+    }
+
+    public function join_supplier()
+    {
+        return $this->belongsTo(Supplier::class, 'supplier', 'id');
+    }
+
+    //////belongsto yang satu data
+    //////hasmany banyak data
 }

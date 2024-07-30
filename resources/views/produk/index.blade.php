@@ -56,11 +56,11 @@
                                                 <th class="cell">Kode</th>
                                                 <th class="cell">Produk</th>
                                                 <th class="cell">Satuan</th>
-                                                <th class="cell">Kategori</th>
-                                                <th class="cell">Supplier</th>
                                                 <th class="cell">Stok</th>
                                                 <th class="cell">Harga Beli</th>
                                                 <th class="cell">Harga Jual</th>
+                                                <th class="cell">Kategori</th>
+                                                <th class="cell">Supplier</th>
                                                 <th class="cell"></th>
                                             </tr>
                                         </thead>
@@ -74,11 +74,11 @@
                                                     <td class="cell">{{ $list->kode }}</td>
                                                     <td class="cell">{{ $list->produk }}</td>
                                                     <td class="cell">{{ $list->satuan }}</td>
-                                                    <td class="cell">{{ $list->kategori }}</td>
-                                                    <td class="cell">{{ $list->supplier }}</td>
                                                     <td class="cell">{{ $list->stok }}</td>
                                                     <td class="cell">{{ $list->hargabeli }}</td>
                                                     <td class="cell">{{ $list->hargajual }}</td>
+                                                    <td class="cell">{{ $list->join_kategori->kategori }}</td>
+                                                    <td class="cell">{{ $list->join_supplier->supplier }}</td>
                                                     <td class=""
                                                         style="display: flex; gap: 8px; width: auto; justify-content: center;">
                                                         <a data-bs-toggle="modal"
@@ -110,8 +110,8 @@
                                                                 aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form action="/produk-update/{{ $list->id }}" method="post"
-                                                                enctype="multipart/form-data">
+                                                            <form action="/produk-update/{{ $list->id }}"
+                                                                method="post" enctype="multipart/form-data">
                                                                 @csrf
                                                                 @method('PUT')
                                                                 <div class="mb-3">
@@ -120,7 +120,8 @@
                                                                     <input type="text" class="form-control"
                                                                         id="kode" name="kode"
                                                                         @error('kode') is-invalid @enderror
-                                                                        placeholder="Masukan No Kode" value="{{ $list->kode }}" required />
+                                                                        placeholder="Masukan No Kode"
+                                                                        value="{{ $list->kode }}" required readonly />
                                                                     @error('kode')
                                                                         <div class="invalid-feedback">
                                                                             {{ $message }}
@@ -132,63 +133,69 @@
                                                                         class="form-label">Produk</label>
                                                                     <input type="text" class="form-control"
                                                                         id="produk" name="produk"
-                                                                        placeholder="Masukan Produk" value="{{ $list->produk }}" required />
+                                                                        placeholder="Masukan Produk"
+                                                                        value="{{ $list->produk }}" required />
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <label for="setting-input-3"
                                                                         class="form-label">Satuan</label>
                                                                     <input type="text" class="form-control"
                                                                         id="satuan" name="satuan"
-                                                                        placeholder="Masukan Satuan" value="{{ $list->satuan }}" required />
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <label for="setting-input-2"
-                                                                        class="form-label">Kategori</label>
-                                                                        <select name="kategori" id="kategori"
-                                                                        class="form-control" style="height: 50px">
-                                                                        @foreach ($kategori as $select)
-                                                                            <option value="{{ $select->kategori }}"
-                                                                                {{ old('level', @$select->kategori) == $list->kategori ? 'selected' : '' }}>
-                                                                                {{ $select->kategori }}</option>
-                                                                        @endforeach
-                                                                    </select>
+                                                                        placeholder="Masukan Satuan"
+                                                                        value="{{ $list->satuan }}" required />
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <label for="setting-input-2"
                                                                         class="form-label">Stok</label>
                                                                     <input type="text" class="form-control"
                                                                         id="stok" name="stok"
-                                                                        placeholder="Masukan Stok" value="{{ $list->stok }}" required />
+                                                                        placeholder="Masukan Stok"
+                                                                        value="{{ $list->stok }}" required />
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <label for="setting-input-2" class="form-label">Harga
                                                                         Beli</label>
                                                                     <input type="text" class="form-control"
                                                                         id="hargabeli" name="hargabeli"
-                                                                        placeholder="Masukan Harga Beli" value="{{ $list->hargabeli }}" required />
+                                                                        placeholder="Masukan Harga Beli"
+                                                                        value="{{ $list->hargabeli }}" required />
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <label for="setting-input-2" class="form-label">Harga
                                                                         Jual</label>
                                                                     <input type="text" class="form-control"
                                                                         id="hargajual" name="hargajual"
-                                                                        placeholder="Masukan Harga Jual" value="{{ $list->hargajual }}" required />
+                                                                        placeholder="Masukan Harga Jual"
+                                                                        value="{{ $list->hargajual }}" required />
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <label for="setting-input-2"
                                                                         class="form-label">Keterangan</label>
                                                                     <input type="text" class="form-control"
                                                                         id="keterangan" name="keterangan"
-                                                                        placeholder="Masukan Keterangan" value="{{ $list->keterangan }}" required />
+                                                                        placeholder="Masukan Keterangan"
+                                                                        value="{{ $list->keterangan }}" required />
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="setting-input-2"
+                                                                        class="form-label">Kategori</label>
+                                                                    <select name="kategori" id="kategori"
+                                                                        class="form-control" style="height: 50px">
+                                                                        @foreach ($kategori as $select)
+                                                                            <option value="{{ $select->id }}"
+                                                                                {{ old('level', @$select->id) == $list->kategori ? 'selected' : '' }}>
+                                                                                {{ $select->kategori }}</option>
+                                                                        @endforeach
+                                                                    </select>
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <label for="setting-input-2"
                                                                         class="form-label">Supplier</label>
-                                                                        <select name="supplier" id="supplier"
+                                                                    <select name="supplier" id="supplier"
                                                                         class="form-control" style="height: 50px">
                                                                         @foreach ($supplier as $select)
-                                                                            <option value="{{ $select->supplier }}"
-                                                                                {{ old('level', @$select->supplier) == $list->supplier ? 'selected' : '' }}>
+                                                                            <option value="{{ $select->id }}"
+                                                                                {{ old('level', @$select->id) == $list->supplier ? 'selected' : '' }}>
                                                                                 {{ $select->supplier }}</option>
                                                                         @endforeach
                                                                     </select>
@@ -234,7 +241,8 @@
                         <div class="mb-3">
                             <label for="setting-input-1" class="form-label">Kode</label>
                             <input type="text" class="form-control" id="kode" name="kode"
-                                @error('kode') is-invalid @enderror placeholder="Masukan No Kode" value="BRG{{ $kodeauto->invoice }}" readonly />
+                                @error('kode') is-invalid @enderror placeholder="Masukan No Kode"
+                                value="BRG{{ $kodeauto->invoice }}" readonly />
                             @error('kode')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -250,14 +258,6 @@
                             <label for="setting-input-3" class="form-label">Satuan</label>
                             <input type="text" class="form-control" id="satuan" name="satuan"
                                 placeholder="Masukan Satuan" required />
-                        </div>
-                        <div class="mb-3">
-                            <label for="setting-input-2" class="form-label">Kategori</label>
-                            <select name="kategori" id="kategori" class="form-control" style="height: 50px">
-                                @foreach ($kategori as $list)
-                                    <option value="{{ $list->kategori }}">{{ $list->kategori }}</option>
-                                @endforeach
-                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="setting-input-2" class="form-label">Stok</label>
@@ -280,10 +280,18 @@
                                 placeholder="Masukan Keterangan" required />
                         </div>
                         <div class="mb-3">
+                            <label for="setting-input-2" class="form-label">Kategori</label>
+                            <select name="kategori" id="kategori" class="form-control" style="height: 50px">
+                                @foreach ($kategori as $list)
+                                    <option value="{{ $list->id }}">{{ $list->kategori }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <label for="setting-input-2" class="form-label">Supplier</label>
                             <select name="supplier" id="supplier" class="form-control" style="height: 50px">
                                 @foreach ($supplier as $list)
-                                    <option value="{{ $list->supplier }}">{{ $list->supplier }}</option>
+                                    <option value="{{ $list->id }}">{{ $list->supplier }}</option>
                                 @endforeach
                             </select>
                         </div>

@@ -14,11 +14,11 @@ class produkController extends Controller
         if (request('search_produk')) {
             $data['produk'] = Produk::where('produk', 'like', '%' . request('search_produk') . '%')->paginate(5);
         } else {
-            $data['produk'] = Produk::paginate(5)->withQueryString();
+            $data['produk'] = Produk::with('join_kategori','join_supplier')->paginate(5);
         }
         $data['kodeauto'] = Produk::selectRaw('LPAD(CONVERT(COUNT("kode") + 1, char(8)) , 5,"0") as invoice')->first();
         $data['kategori'] = Kategori::all();
-        $data['supplier'] = Supplier::all();
+        $data['supplier'] = Supplier::where('status', 'Active')->get();
         $data['title'] = "Produk";
         return view('produk.index', $data);
     }

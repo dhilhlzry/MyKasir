@@ -20,7 +20,7 @@ class RoleTableSeeder extends Seeder
         $roles = [
             'Super Admin',
             'Admin',
-            'Project Coordinator'
+            'Cashier'
         ];
 
         foreach ($roles as $key => $value) {

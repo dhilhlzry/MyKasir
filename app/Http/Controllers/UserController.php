@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Headtrans;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -13,7 +14,7 @@ class UserController extends Controller
         if (request('search_user')) {
             $data['user'] = User::where('name', 'like', '%' . request('search_user') . '%')->paginate(5);
         } else {
-            $data['user'] = User::paginate(5)->withQueryString();
+            $data['user'] = User::with('join_roles')->paginate(5);
         }
         $data['roles'] = Role::all();
         $data['title'] = "User";
@@ -33,7 +34,7 @@ class UserController extends Controller
 
         $user = User::create($validatedata);
 
-        $query = Role::where('name', $request->level)->first();
+        $query = Role::where('id', $request->level)->first();
         $user->assignRole($query->id);
 
         return redirect('/user')->with('success', 'Tambah Data Berhasil !');
@@ -51,7 +52,7 @@ class UserController extends Controller
         $user = user::find($id);
         $user->update($validatedata);
 
-        $query = Role::where('name', $request->level)->first();
+        $query = Role::where('id', $request->level)->first();
         $user->syncRoles($query->id);
 
         return redirect('/user')->with('success', 'Update Data Berhasil !');
@@ -60,7 +61,11 @@ class UserController extends Controller
     public function delete(Request $request, string $id)
     {
         $delete = User::findOrFail($id);
-        $delete->delete();
-        return redirect('/user')->with('success', 'Delete Data Berhasil !');
+        if ($check = Headtrans::where('user', $delete->id)->first()) {
+            return redirect('/user')->with('warning', 'User Important !');;
+        } else {
+            $user = User::find($id)->delete();
+            return redirect('/user')->with('success', 'Delete Data Berhasil !');;
+        }
     }
 }

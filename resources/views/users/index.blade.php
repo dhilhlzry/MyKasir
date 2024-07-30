@@ -61,7 +61,11 @@
                                                 <th class="cell">Created At</th>
                                                 <th class="cell">Status</th>
                                                 <th class="cell">Role</th>
+                                                @can('users-edit')
+                                                @can('users-delete')
                                                 <th class="cell"></th>
+                                                @endcan
+                                                @endcan
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -83,7 +87,9 @@
                                                             <span class="badge bg-danger">{{ $list->status }}</span>
                                                         @endif
                                                     </td>
-                                                    <td class="cell">{{ $list->level }}</td>
+                                                    <td class="cell">{{ $list->join_roles->name }}</td>
+                                                    @can('users-edit')
+                                                    @can('users-delete')
                                                     <td class=""
                                                         style="display: flex; gap: 8px; width: auto; justify-content: center;">
                                                         {{-- <a href=""><span class="status process"><i
@@ -106,6 +112,8 @@
                                                             </form>
                                                         @endcan
                                                     </td>
+                                                    @endcan
+                                                    @endcan
                                             </tr>
 
                                             <!-- Modal -->
@@ -131,7 +139,7 @@
                                                                         id="nip" name="nip"
                                                                         @error('nip') is-invalid @enderror
                                                                         placeholder="Masukan No Nip"
-                                                                        value="{{ $list->nip }}" required />
+                                                                        value="{{ $list->nip }}" required readonly />
                                                                     @error('nip')
                                                                         <div class="invalid-feedback">
                                                                             {{ $message }}
@@ -173,8 +181,8 @@
                                                                     <select name="level" id="level"
                                                                         class="form-control" style="height: 50px">
                                                                         @foreach ($roles as $role)
-                                                                            <option value="{{ $role->name }}"
-                                                                                {{ old('level', @$role->name) == $list->level ? 'selected' : '' }}>
+                                                                            <option value="{{ $role->id }}"
+                                                                                {{ old('level', @$role->id) == $list->level ? 'selected' : '' }}>
                                                                                 {{ $role->name }}</option>
                                                                         @endforeach
                                                                     </select>
@@ -254,7 +262,7 @@
                             <label for="setting-input-2" class="form-label">Role</label>
                             <select name="level" id="level" class="form-control" style="height: 50px">
                                 @foreach ($roles as $list)
-                                    <option value="{{ $list->name }}">{{ $list->name }}</option>
+                                    <option value="{{ $list->id }}">{{ $list->name }}</option>
                                 @endforeach
                             </select>
                         </div>

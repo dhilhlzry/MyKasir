@@ -171,7 +171,7 @@
                             <div class="table-search-form row gx-1 justify-content-end" style="margin-top: -20px">
                                 <div class="col-auto">
                                     <label for="setting-input-2" class="form-label">Bayar :</label>
-                                    <input type="text" name="bayar" id="bayar"
+                                    <input type="text" name="bayar" id="bayar" value="{{ old('bayar') }}"
                                         class="form-control search-orders mb-1">
                                     <label for="setting-input-2" class="form-label">Kembali :</label>
                                     <input type="text" name="fake_kembali" id="fake_kembali"
@@ -210,10 +210,10 @@
                                             <th class="cell">Kode</th>
                                             <th class="cell">Produk</th>
                                             <th class="cell">Satuan</th>
-                                            <th class="cell">Kategori</th>
-                                            <th class="cell">Supplier</th>
                                             <th class="cell">Stok</th>
                                             <th class="cell">Harga</th>
+                                            <th class="cell">Kategori</th>
+                                            <th class="cell">Supplier</th>
                                             <th class="cell"></th>
                                         </tr>
                                     </thead>
@@ -227,10 +227,10 @@
                                                 <td class="cell">{{ $list->kode }}</td>
                                                 <td class="cell">{{ $list->produk }}</td>
                                                 <td class="cell">{{ $list->satuan }}</td>
-                                                <td class="cell">{{ $list->kategori }}</td>
-                                                <td class="cell">{{ $list->supplier }}</td>
                                                 <td class="cell">{{ $list->stok }}</td>
                                                 <td class="cell">{{ $list->hargajual }}</td>
+                                                <td class="cell">{{ $list->join_kategori->kategori }}</td>
+                                                <td class="cell">{{ $list->join_supplier->supplier }}</td>
                                                 <td class=""
                                                     style="display: flex; gap: 8px; width: auto; justify-content: center;">
                                                     <a href="/tmbh_keranjang/{{ $list->id }}"><span

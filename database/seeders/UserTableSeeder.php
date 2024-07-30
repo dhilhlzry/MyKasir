@@ -24,7 +24,7 @@ class UserTableSeeder extends Seeder
 			'email' => env('DEFAULT_EMAIL', 'fhalyzari@gmail.com'),
 			'password' => Hash::make(env('DEFAULT_PASSWORD', 12345678)),
             'status' => 'Active',
-            'level' => 'Super Admin',
+            'level' => '1',
 			// 'role_id' => 1,
             
         ]);

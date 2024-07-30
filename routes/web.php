@@ -5,6 +5,7 @@ use App\Http\Controllers\kategoriController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\produkController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\transaksiController;
 use App\Http\Controllers\UserController;
@@ -52,12 +53,13 @@ Route::get('/kategori', [kategoriController::class, 'index'])->middleware('auth'
 Route::post('/kategori-simpan', [kategoriController::class, 'store'])->middleware('auth');
 Route::put('/kategori-update/{id}', [kategoriController::class, 'update'])->middleware('auth');
 Route::delete('/delete_kategori/{id}', [kategoriController::class, 'delete'])->middleware('auth');
+Route::get('/detail_kategori/{id}', [kategoriController::class, 'detail'])->middleware('auth');
 
 Route::get('/supplier', [SupplierController::class, 'index'])->middleware('auth');
 Route::post('/supplier-simpan', [SupplierController::class, 'store'])->middleware('auth');
 Route::put('/supplier-update/{id}', [SupplierController::class, 'update'])->middleware('auth');
 Route::delete('/delete_supplier/{id}', [SupplierController::class, 'delete'])->middleware('auth');
-
+Route::get('/detail_supplier/{id}', [SupplierController::class, 'detail'])->middleware('auth');
 
 Route::get('/input_penjualan', [transaksiController::class, 'input_penjualan'])->middleware('auth');
 Route::get('/tmbh_keranjang/{id}', [transaksiController::class, 'tmbh_keranjang'])->middleware('auth');
@@ -67,3 +69,9 @@ Route::delete('/delete_keranjang/{id}', [transaksiController::class, 'delete_ker
 
 Route::get('/data_transaksi', [transaksiController::class, 'data_transaksi'])->middleware('auth');
 Route::get('/detail_transaksi/{id}', [transaksiController::class, 'detail'])->middleware('auth');
+
+Route::get('/setting', [SettingsController::class, 'index'])->middleware('auth');
+Route::put('/profile-update/{id}', [SettingsController::class, 'update_profile'])->middleware('auth');
+Route::put('/setting-update/{id}', [SettingsController::class, 'setting_profile'])->middleware('auth');
+
+Route::get('/notification', [SettingsController::class, 'notification'])->middleware('auth');
